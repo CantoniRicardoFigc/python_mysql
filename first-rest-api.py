@@ -1,5 +1,9 @@
 import mysql.connector
 from flask import Flask, jsonify
+from flask_cors import CORS
+
+app = Flask(__name__)
+CORS(app)
 
 #Connect to mysql
 mydb = mysql.connector.connect(
@@ -10,12 +14,11 @@ mydb = mysql.connector.connect(
 )
 mycursor = mydb.cursor()
 
-app = Flask(__name__)
-
 @app.route("/")
 def hello():
     return "Hello, World!"
 
+'''
 @app.route("/getAllDataInHtml")
 def getAllData():
     mycursor.execute("SELECT * FROM CLASH_ROYALE.Clash_Unit")
@@ -53,6 +56,15 @@ def cardCost():
         result.append(i)
     return jsonify(result)
 
+@app.route("/count")
+def count():
+    mycursor.execute("SELECT * FROM CLASH_ROYALE.Clash_Unit WHERE Count = 'x1'")
+    count = mycursor.fetchall()
+    result = []
+    for i in count:
+        result.append(i)
+    return jsonify(result)'''
+
 @app.route('/count')
 def count():
     mycursor.execute("SELECT * FROM CLASH_ROYALE.Clash_Unit WHERE Count = 'x1'")
@@ -63,12 +75,22 @@ def count():
         json_data.append(dict(zip(row_headers,result)))
     return jsonify(json_data)
 
-'''
-@app.route("/count")
-def count():
-    mycursor.execute("SELECT * FROM CLASH_ROYALE.Clash_Unit WHERE Count = 'x1'")
-    count = mycursor.fetchall()
-    result = []
-    for i in count:
-        result.append(i)
-    return jsonify(result)'''
+@app.route("/getAllDataInHtml")
+def getAllData():
+    mycursor.execute("SELECT * FROM CLASH_ROYALE.Clash_Unit")
+    row_headers=[x[0] for x in mycursor.description]
+    myresult = mycursor.fetchall()
+    json_data = []
+    for x in myresult:
+        json_data.append(dict(zip(row_headers,x)))
+    return jsonify(json_data)
+
+@app.route("/air_transport")
+def air_transport():
+    mycursor.execute("SELECT * FROM CLASH_ROYALE.Clash_Unit WHERE Transport = 'Air'")
+    row_headers=[x[0] for x in mycursor.description]
+    air_units = mycursor.fetchall()
+    json_data=[]
+    for result in air_units:
+        json_data.append(dict(zip(row_headers,result)))
+    return jsonify(json_data)

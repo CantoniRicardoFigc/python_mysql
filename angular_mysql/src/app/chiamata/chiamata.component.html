@@ -1,1 +1,27 @@
-<button (click)="ricercaApi()" class="btn btn-dark" type="button">Search</button>
+<button (click)="ricercaGetAllData()" class="btn btn-dark" type="button">get all data</button>
+<div *ngFor="let unit of ris">
+    {{unit.Cost}}
+    {{unit.Count}}
+    {{unit.Deploy_Time}}
+    {{unit.Hit_Speed}}
+    {{unit.Range_}}
+    {{unit.Rarity}}
+    {{unit.Target}}
+    {{unit.Transport}}
+    {{unit.Type}}
+    {{unit.Unit}}<br>
+</div>
+<button (click)="ricercaCount()" class="btn btn-dark" type="button">count</button>
+<div *ngFor="let unit of ris1">
+    {{unit.Cost}}
+    {{unit.Count}}
+    {{unit.Deploy_Time}}
+    {{unit.Hit_Speed}}
+    {{unit.Range_}}
+    {{unit.Rarity}}
+    {{unit.Target}}
+    {{unit.Transport}}
+    {{unit.Type}}
+    {{unit.Unit}}<br>
+</div>
+
