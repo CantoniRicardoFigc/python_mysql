@@ -1,5 +1,5 @@
 import mysql.connector
-from flask import Flask
+from flask import Flask, jsonify
 
 #Connect to mysql
 mydb = mysql.connector.connect(
@@ -24,7 +24,7 @@ def getAllData():
     for x in myresult:
         print(x)
         result.append(x)
-    return result
+    return jsonify(result)
 
 @app.route("/air_transport")
 def air_transport():
@@ -33,7 +33,7 @@ def air_transport():
     result = []
     for i in air_units:
         result.append(i)
-    return str(result)
+    return jsonify(result)
 
 @app.route("/epic_units")
 def epicUnits():
@@ -42,16 +42,7 @@ def epicUnits():
     result = []
     for i in epic_units:
         result.append(i)
-    return str(result)
-
-@app.route("/count")
-def count():
-    mycursor.execute("SELECT * FROM CLASH_ROYALE.Clash_Unit WHERE Count = 'x1'")
-    count = mycursor.fetchall()
-    result = []
-    for i in count:
-        result.append(i)
-    return str(result)
+    return jsonify(result)
 
 @app.route("/card_cost")
 def cardCost():
@@ -60,5 +51,24 @@ def cardCost():
     result = []
     for i in cost:
         result.append(i)
-    return str(result)
-    
+    return jsonify(result)
+
+@app.route('/count')
+def count():
+    mycursor.execute("SELECT * FROM CLASH_ROYALE.Clash_Unit WHERE Count = 'x1'")
+    row_headers=[x[0] for x in mycursor.description] #this will extract row headers
+    count = mycursor.fetchall()
+    json_data=[]
+    for result in count:
+        json_data.append(dict(zip(row_headers,result)))
+    return jsonify(json_data)
+
+'''
+@app.route("/count")
+def count():
+    mycursor.execute("SELECT * FROM CLASH_ROYALE.Clash_Unit WHERE Count = 'x1'")
+    count = mycursor.fetchall()
+    result = []
+    for i in count:
+        result.append(i)
+    return jsonify(result)'''
