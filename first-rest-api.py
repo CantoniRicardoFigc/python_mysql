@@ -94,3 +94,23 @@ def air_transport():
     for result in air_units:
         json_data.append(dict(zip(row_headers,result)))
     return jsonify(json_data)
+
+@app.route("/epic_units")
+def epicUnits():
+    mycursor.execute("SELECT * FROM CLASH_ROYALE.Clash_Unit WHERE Rarity = 'epic'")
+    row_headers=[x[0] for x in mycursor.description]
+    epic_units = mycursor.fetchall()
+    json_data=[]
+    for result in epic_units:
+        json_data.append(dict(zip(row_headers,result)))
+    return jsonify(json_data)
+
+@app.route("/card_cost")
+def cardCost():
+    mycursor.execute("SELECT * FROM CLASH_ROYALE.Clash_Unit WHERE Cost = '8'")
+    row_headers=[x[0] for x in mycursor.description]
+    cost_units = mycursor.fetchall()
+    json_data=[]
+    for result in cost_units:
+        json_data.append(dict(zip(row_headers,result)))
+    return jsonify(json_data)
