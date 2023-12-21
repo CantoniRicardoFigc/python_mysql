@@ -24,4 +24,42 @@
     {{unit.Type}}
     {{unit.Unit}}<br>
 </div>
-
+<button (click)="ricercaAirTransport()" class="btn btn-dark" type="button">air transport</button>
+<div *ngFor="let unit of ris2">
+    {{unit.Cost}}
+    {{unit.Count}}
+    {{unit.Deploy_Time}}
+    {{unit.Hit_Speed}}
+    {{unit.Range_}}
+    {{unit.Rarity}}
+    {{unit.Target}}
+    {{unit.Transport}}
+    {{unit.Type}}
+    {{unit.Unit}}<br>
+</div>
+<button (click)="ricercaEpicUnits()" class="btn btn-dark" type="button">epic units</button>
+<div *ngFor="let unit of ris3">
+    {{unit.Cost}}
+    {{unit.Count}}
+    {{unit.Deploy_Time}}
+    {{unit.Hit_Speed}}
+    {{unit.Range_}}
+    {{unit.Rarity}}
+    {{unit.Target}}
+    {{unit.Transport}}
+    {{unit.Type}}
+    {{unit.Unit}}<br>
+</div>
+<button (click)="ricercaCardCost()" class="btn btn-dark" type="button">card cost</button>
+<div *ngFor="let unit of ris4">
+    {{unit.Cost}}
+    {{unit.Count}}
+    {{unit.Deploy_Time}}
+    {{unit.Hit_Speed}}
+    {{unit.Range_}}
+    {{unit.Rarity}}
+    {{unit.Target}}
+    {{unit.Transport}}
+    {{unit.Type}}
+    {{unit.Unit}}<br>
+</div>

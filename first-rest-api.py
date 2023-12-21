@@ -16,7 +16,7 @@ mycursor = mydb.cursor()
 
 @app.route("/")
 def hello():
-    return "Hello, World!"
+    return "Hello, Worldb!"
 
 '''
 @app.route("/getAllDataInHtml")
